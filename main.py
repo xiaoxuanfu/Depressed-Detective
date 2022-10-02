@@ -105,7 +105,7 @@ def main(args):
     if bool(strtobool(args.test)) is True:
         data_arr = data_arr/np.sum(data_arr[0]) 
         np.save("test.npy", data_arr[0])
-        
+
     if bool(strtobool(args.audio)) is True: # run and add audio analyse if argument is True
         audio_df = audio_analyse(str(args.test_file))
         emotion_data = pd.read_csv("train_data.csv")
@@ -131,11 +131,13 @@ if __name__ == '__main__':
     parser.add_argument(
         '--audio',
         default='False',
-        choices=['True', 'False'])
+        choices=['True', 'False'],
+        type=str)
     parser.add_argument(
         '--test',
         default='False',
-        choices=['True', 'False'])
+        choices=['True', 'False'],
+        type=str)
     
     args = parser.parse_args()
     main(args)
