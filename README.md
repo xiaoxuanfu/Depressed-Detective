@@ -25,6 +25,9 @@ This repository consists of the following main files and directories:
 - Generate synthetic data from ```train_data.csv``` to obtain ```train_data_extended.csv```, containing twice the size.
 - The main function used is from ```tabgan```, making use of Generative Adversarial Networks (GAN) to generate data.
 
+(5). telebot.gs
+- Consists of code for a Telegram bot that tells the user the people who are deemed as at-risk of depression.
+
 (5). working_files
 - Directory consisting of audio and video files for training and testing.
 
