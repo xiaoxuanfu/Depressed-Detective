@@ -61,19 +61,22 @@ def main(args):
         result = DeepFace.analyze(frame,actions = ['emotion'], enforce_detection=False, prog_bar=False)
 
         # Read in all the emotions' intensity values
-        curr_arr= [result['emotion']['happy'], result['emotion']['angry'], result['emotion']['disgust'], result['emotion']['sad'], result['emotion']['fear'], result['emotion']['neutral'], result['emotion']['surprise']]
+        curr_arr = [result['emotion']['happy'], result['emotion']['angry'], result['emotion']['disgust'], result['emotion']['sad'], result['emotion']['fear'], result['emotion']['neutral'], result['emotion']['surprise']]
         data_arr += np.array(curr_arr)# Cumulative sum throughout video
         curr_count += 1 # keep track of current frame count and append data at fixed intervals
-        if (curr_count % args.seq_len)==0:
-            curr_count = 0
-            data_arr = data_arr/np.sum(data_arr[0]) # to 'scale' values to their proportion of total
-            data_arr = np.concatenate(([[False if f'{args.test_file}'=='not_depressed' else True]], data_arr), axis=1)
-            # Append values to csv file
-            with open('train_data.csv', 'a', newline='') as csvfile:
-                writer_object = writer(csvfile)
-                writer_object.writerow(data_arr[0])     
-                csvfile.close()
-            data_arr = np.zeros((1,len(curr_arr)))
+        if bool(strtobool(args.test)) is not True:
+            if (curr_count % args.seq_len)==0:
+                curr_count = 0
+                data_arr = data_arr/np.sum(data_arr[0]) # to 'scale' values to their proportion of total
+                data_arr = np.concatenate(([[False if f'{args.test_file}'=='not_depressed' else True]], data_arr), axis=1)
+                # Append values to csv file
+                with open('train_data.csv', 'a', newline='') as csvfile:
+                    writer_object = writer(csvfile)
+                    writer_object.writerow(data_arr[0])     
+                    csvfile.close()
+                data_arr = np.zeros((1,len(curr_arr)))
+        else:
+            pass # if test argument is true, pass to only output one observation (i.e. the test.mp4 vid)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(gray,1.1,4)
@@ -99,7 +102,10 @@ def main(args):
 
     cap.release()
     cv2.destroyAllWindows() 
-
+    if bool(strtobool(args.test)) is True:
+        data_arr = data_arr/np.sum(data_arr[0]) 
+        np.save("test.npy", data_arr[0])
+        
     if bool(strtobool(args.audio)) is True: # run and add audio analyse if argument is True
         audio_df = audio_analyse(str(args.test_file))
         emotion_data = pd.read_csv("train_data.csv")
@@ -124,6 +130,10 @@ if __name__ == '__main__':
         type=int)
     parser.add_argument(
         '--audio',
+        default='False',
+        choices=['True', 'False'])
+    parser.add_argument(
+        '--test',
         default='False',
         choices=['True', 'False'])
     

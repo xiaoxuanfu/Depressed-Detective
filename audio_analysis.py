@@ -51,7 +51,7 @@ def audio_analyse(filename):
             x.append(feature)
         return np.array(x)
 
-    column_names = ['Pitch 1', 'Pitch 2', 'Pitch 3', 'Pitch 4', 'Pitch 5', 'Pitch 6', 'Pitch 7', 'Pitch 8','Pitch 9', 'Pitch 10', 'Pitch 11', 'Pitch 12']
+    column_names = ['Pitch1', 'Pitch2', 'Pitch3', 'Pitch4', 'Pitch5', 'Pitch6', 'Pitch7', 'Pitch8','Pitch9', 'Pitch10', 'Pitch11', 'Pitch12']
     audio_files= glob('../working_files/audio_chunks/*.wav')
     audio_data= load_data(audio_files)
     audio_df = pd.DataFrame(audio_data)
