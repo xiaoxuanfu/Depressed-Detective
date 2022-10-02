@@ -2,11 +2,13 @@
 Official Codebase for Depressed Detective: monitoring of personnel well-being with computer vision and deep learning.
 Submitted as part of the MLDA-EEE Deep Learning Week 2022 Hackathon.
 
+The objective of this project is to serve as a preventative measure to detect workers facing burnout, especially in the context of Singapore striving towards Smart Nation, by leveraging computer vision and deep learning methods.
+
 ### Code Explanation
 
 This repository consists of the following main files and directories:
 (1). main.py
-- Load video data and obtain facial and audio features depending on arguments passed.
+- Loads video data and obtain facial and audio features depending on arguments passed.
 - Data is saved in ```train_data.csv```, consisting of 1 label, 7 facial and 12 audio features.
 - Run test video to get prediction.
 

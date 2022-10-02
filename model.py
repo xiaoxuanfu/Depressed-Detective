@@ -20,7 +20,7 @@ from math import sqrt
 
 
 # XGBoostClassifier
-def xgbreg(input_file, x_train, x_test, y_train, y_test):
+def xgbreg(x_train, x_test, y_train, y_test):
     #df = pd.read_csv(input_file)
     #y = df['label']
     #x = df[['happy','angry','disgust','sad','fear','neutral','surprise']]
@@ -32,7 +32,7 @@ def xgbreg(input_file, x_train, x_test, y_train, y_test):
     return(y_train_pred_x, y_test_pred_x,xreg)
     
 # Logistic Regression
-def logreg(input_file, x_train, x_test, y_train, y_test,):
+def logireg(x_train, x_test, y_train, y_test,):
     #df = pd.read_csv(input_file)
     #y = df['label']
     #x = df[['happy','angry','disgust','sad','fear','neutral','surprise']]
@@ -44,7 +44,7 @@ def logreg(input_file, x_train, x_test, y_train, y_test,):
     return(y_train_pred_log, y_test_pred_log,logreg)
 
 # Random Forest
-def forreg(input_file, x_train, x_test, y_train, y_test):
+def forreg(x_train, x_test, y_train, y_test):
     #df = pd.read_csv(input_file)
     #y = df['label']
     #x = df[['happy','angry','disgust','sad','fear','neutral','surprise']]
@@ -56,13 +56,13 @@ def forreg(input_file, x_train, x_test, y_train, y_test):
     return(y_train_pred_for, y_test_pred_for,base)
 
 # Keras
-def kerreg(input_file, x_train, x_test, y_train, y_test):
+def kerreg(x_train, x_test, y_train, y_test):
     #df = pd.read_csv(input_file)
     #y = df['label']
     #x = df[['happy','angry','disgust','sad','fear','neutral','surprise']]
     #x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.25,shuffle=True)
     model = Sequential()
-    model.add(Dense(12, input_dim=7, activation='relu'))
+    model.add(Dense(12, input_dim=19, activation='relu'))
     model.add(Dense(8, activation='relu'))
     model.add(Dense(1, activation='sigmoid'))
     model.compile(loss='MeanSquaredError', optimizer='adam', metrics=['accuracy'])
