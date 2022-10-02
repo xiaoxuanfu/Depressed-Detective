@@ -1,0 +1,52 @@
+# Depressed-Detective
+Official Codebase for Depressed Detective: monitoring of personnel well-being with computer vision and deep learning.
+Submitted as part of the MLDA-EEE Deep Learning Week 2022 Hackathon.
+
+The objective of this project is to serve as a preventative measure to detect workers facing burnout, especially in the context of Singapore striving towards Smart Nation, by leveraging computer vision and deep learning methods.
+
+### Code Explanation
+
+This repository consists of the following main files and directories:
+(1). main.py
+- Loads video data and obtain facial and audio features depending on arguments passed.
+- Data is saved in ```train_data.csv```, consisting of 1 label, 7 facial and 12 audio features.
+- Run test video to get prediction.
+
+(2). summary.ipynb
+- Provides summary of the entire pipeline from data collection, to data generation and model training and prediction.
+- Offers in-depth analysis of quality of generated data and model evaluation.
+- Shows test on custom video and output prediction.
+
+(3). model.py
+- Contains functions to call the classifier models to train on ```train_data_extended.csv``` and is called in ```summary.ipynb```.
+- Models include logistic regression, XGBoost, random forest and Multilayer Perceptron (MLP) from Keras.
+
+(4). audio_analysis.py
+- Reads in video data and obtain audio features (relating to 12 pitch classes).
+- Called in main.py if user inputs ```audio``` argument as True.
+
+(5). generator.py
+- Generates synthetic data from ```train_data.csv``` to obtain ```train_data_extended.csv```, containing twice the size.
+- The main function used is from ```tabgan```, making use of Generative Adversarial Networks (GAN) to generate data.
+
+(6). working_files
+- Directory consisting of audio and video files for training and testing.
+
+(7). metrics
+- Consists of evaulation metrics to test the quality of generated data by ```generator.py```. 
+- Results shown in ```summary.ipynb```.
+
+### Example command
+
+First, create a virtual environment for DAGAN and install the dependencies from ```requirements.txt```:
+
+```shell
+conda create -n depr_detective python=3.10
+conda activate depr_detective
+pip install -r requirements.txt
+``` 
+Then, run the main.py file
+
+```shell
+$ python main.py --test_file depressed --seq_len 25 --audio False --test False
+```
