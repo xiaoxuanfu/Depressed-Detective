@@ -35,6 +35,10 @@ This repository consists of the following main files and directories:
 - Consists of evaulation metrics to test the quality of generated data by ```generator.py```. 
 - Results shown in ```summary.ipynb```.
 
+### Demo Video
+
+[![Demo Video](https://img.youtube.com/vi/LHZeXcXwLTY/0.jpg)](https://youtu.be/LHZeXcXwLTY)
+
 ### Example command
 
 First, create a virtual environment for DAGAN and install the dependencies from ```requirements.txt```:
